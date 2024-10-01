@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Sign-Up Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .form-container { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #f80d0d; border-radius: 5px; }
+        .error { color: red; font-size: 0.8em; }
+        body{
+            background-color: rgb(204, 198, 210);
+        }
+        form{
+            background-color: rgb(237, 168, 220);
+        }
+button{
+    background-color: rgb(11, 124, 231);
+}
+input{
+    background-color: rgb(209, 209, 209);
+}
+label{
+    background-color: rgba(226, 218, 218, 0.082);
+}
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="return validateLogin()">
+        <label for="loginEmail"><b>Email:</b></label><br>
+        <input type="email" id="loginEmail" required><br>
+        <div id="loginEmailError" class="error"></div>
+        
+        <label for="loginPassword"><b>Password:</b></label><br>
+        <input type="password" id="loginPassword" required>
+        <div id="loginPasswordError" class="error"></div><br>
+        
+        <button type="submit">Login</button>
+    </form>
+
+    <h2>Sign-Up</h2>
+    <form id="signupForm" onsubmit="return validateSignup()">
+        <label for="signupEmail"><b>Email:</b></label><br>
+        <input type="email" id="signupEmail" required><br>
+        <div id="signupEmailError" class="error"></div>
+        
+        <label for="signupPassword"><b>Password:</b></label><br>
+        <input type="password" id="signupPassword" required>
+        <div id="signupPasswordError" class="error"></div>
+        
+        <label for="confirmPassword"><b>Confirm Password:</b></label>
+        <input type="password" id="confirmPassword" required>
+        <div id="confirmPasswordError" class="error"></div>
+<br>
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+
+<script>
+    function validateLogin() {
+        let email = document.getElementById('loginEmail').value;
+        let password = document.getElementById('loginPassword').value;
+        let valid = true;
+
+        document.getElementById('loginEmailError').innerText = '';
+        document.getElementById('loginPasswordError').innerText = '';
+
+        // Email validation
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            document.getElementById('loginEmailError').innerText = 'Please enter a valid email address.';
+            valid = false;
+        }
+        
+        // Password length validation
+        if (password.length < 6) {
+            document.getElementById('loginPasswordError').innerText = 'Password must be at least 6 characters.';
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    function validateSignup() {
+        let email = document.getElementById('signupEmail').value;
+        let password = document.getElementById('signupPassword').value;
+        let confirmPassword = document.getElementById('confirmPassword').value;
+        let valid = true;
+
+        document.getElementById('signupEmailError').innerText = '';
+        document.getElementById('signupPasswordError').innerText = '';
+        document.getElementById('confirmPasswordError').innerText = '';
+
+        // Email validation
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            document.getElementById('signupEmailError').innerText = 'Please enter a valid email address.';
+            valid = false;
+        }
+
+        // Password length validation
+        if (password.length < 6) {
+            document.getElementById('signupPasswordError').innerText = 'Password must be at least 6 characters.';
+            valid = false;
+        }
+
+        // Confirm password validation
+        if (password !== confirmPassword) {
+            document.getElementById('confirmPasswordError').innerText = 'Passwords do not match.';
+            valid = false;
+        }
+
+        return valid;
+    }
+</script>
+
+</body>
+</html>
